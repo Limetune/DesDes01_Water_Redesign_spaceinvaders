@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    
     // Start is called before the first frame update
     public float moveSpeed = 5f;
     private Vector2 direction = Vector2.right;
