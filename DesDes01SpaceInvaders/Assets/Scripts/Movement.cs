@@ -6,7 +6,7 @@ public class Movement : MonoBehaviour
 {
     
     // Start is called before the first frame update
-    public float moveSpeed = 5f;
+    public float speed = 5f;
     private Vector2 direction = Vector2.right;
     private List<Transform> segments = new List<Transform>();
     public Transform segmentPrefab;
@@ -18,41 +18,26 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        HandleInput();
-        MoveSnake();
+        Vector3 position = transform.position;
+
+        // Update the position of the player based on the input
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        {
+            position.x -= speed * Time.deltaTime;
+        }
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            position.x += speed * Time.deltaTime;
+        }
+
+        // Clamp the position of the character so they do not go out of bounds
+        Vector3 leftEdge = Camera.main.ViewportToWorldPoint(Vector3.zero);
+        Vector3 rightEdge = Camera.main.ViewportToWorldPoint(Vector3.right);
+        position.x = Mathf.Clamp(position.x, leftEdge.x, rightEdge.x);
+
+        // Set the new position
+        transform.position = position;
     }
 
-    void HandleInput()
-    {
-        if (Input.GetKeyDown(KeyCode.UpArrow) && direction != Vector2.down)
-        {
-            direction = Vector2.up;
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow) && direction != Vector2.up)
-        {
-            direction = Vector2.down;
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow) && direction != Vector2.right)
-        {
-            direction = Vector2.left;
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow) && direction != Vector2.left)
-        {
-            direction = Vector2.right;
-        }
-    }
-
-    void MoveSnake()
-    {
-        Vector2 newPosition = (Vector2)transform.position + direction * moveSpeed * Time.deltaTime;
-        transform.position = newPosition;
-
-        if (segments.Count > 0)
-        {
-            for (int i = segments.Count - 1; i > 0; i--)
-            {
-                segments[i].position = segments[i - 1].position;
-            }
-        }
-    }
+    
 }
