@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+
+    public static Enemy Instance;
     // Start is called before the first frame update
     public float speed = 5f;
     public float cycleTime = 30f;
@@ -13,6 +15,11 @@ public class Enemy : MonoBehaviour
     private Vector2 rightDestination;
     private int direction = -1;
     private bool spawned;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {

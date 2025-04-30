@@ -16,5 +16,7 @@ public class Lazer : MonoBehaviour
     {
         Destroy(collision.gameObject);
         Destroy(gameObject);
+
+        ScoreManager.Instance.AddScore();
     }
 }
