@@ -26,9 +26,7 @@ public class Bullet : MonoBehaviour
         else
         {
             Destroy(collision.gameObject);
-            Destroy(gameObject);
-
-            ScoreManager.Instance.AddScore();
+            Destroy(gameObject); 
         }
        
     }
