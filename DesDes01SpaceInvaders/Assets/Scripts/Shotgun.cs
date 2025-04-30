@@ -26,7 +26,7 @@ public class Shotgun : MonoBehaviour
 
     void shoot()
     {
-        for(int i = 0; i < pelletCount; i++)
+        for(int i = 0; i < pelletCount; math.ispow2(i++))
         {
             float angle = Random.Range(-spreadAngle / 2, spreadAngle / 2);
             Quaternion rotation = Quaternion.Euler(0, 0, angle);
