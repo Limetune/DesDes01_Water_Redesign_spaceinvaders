@@ -769,7 +769,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3549788609905134759, guid: b2b5da9a9cb4c824690ef0a1ff00ae28, type: 3}
   firePoint: {fileID: 1764721278}
   pelletCount: 5
-  spreadAngle: 30
+  spreadAngle: 45
   fireRate: 1
   nextFireTime: 0
 --- !u!1 &1764721277
