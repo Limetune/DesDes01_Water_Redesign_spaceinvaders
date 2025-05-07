@@ -1,39 +1,48 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public float speed = 10f;
+    public float lifeTime = 2f;
 
-    public float speed = 10;
-    public float lifeTime = 2;
-    
-    
-    // Start is called before the first frame update
-    void Update()
+    private Rigidbody2D rb;
+
+    void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         Destroy(gameObject, lifeTime);
+    }
 
+    // Updated SetDirection to accept a speed boost
+    public void SetDirection(Vector2 direction, float speedBoost = 0f)
+    {
+        if (rb == null)
+            rb = GetComponent<Rigidbody2D>();
+
+        // Apply the speed boost to the bullet speed
+        rb.velocity = direction.normalized * (speed + speedBoost);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Pellet"))
-        {
+        if (collision.gameObject.CompareTag("Pellet"))
             return;
-        }
-        else
-        {
-            Destroy(collision.gameObject);
-            Destroy(gameObject); 
-        }
-       
+
+        Destroy(collision.gameObject);
+        Destroy(gameObject);
     }
 
-    // Update is called once per frame
-    public void SetDirection(Vector2 direction)
+    // Bullet Speed Buff (called from power-up trigger)
+    public void ApplySpeedBuff(float amount, float duration)
     {
-        GetComponent<Rigidbody2D>().velocity = direction.normalized * speed;
+        StartCoroutine(SpeedBuffCoroutine(amount, duration));
+    }
+
+    private IEnumerator SpeedBuffCoroutine(float amount, float duration)
+    {
+        speed += amount;
+        yield return new WaitForSeconds(duration);
+        speed -= amount;
     }
 }
