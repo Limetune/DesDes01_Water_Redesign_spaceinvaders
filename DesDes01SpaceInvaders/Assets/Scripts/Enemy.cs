@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Enemy : MonoBehaviour
 {
+    
     // Start is called before the first frame update
     public float speed = 5f;
     public float cycleTime = 30f;
@@ -13,9 +15,11 @@ public class Enemy : MonoBehaviour
     private Vector2 rightDestination;
     private int direction = -1;
     private bool spawned;
+    private pointCounter pointCounter;
 
     private void Start()
     {
+        pointCounter = FindObjectOfType<pointCounter>();
         // Transform the viewport to world coordinates so we can set the mystery
         // ship's destination points
         Vector3 leftEdge = Camera.main.ViewportToWorldPoint(Vector3.zero);
@@ -92,5 +96,12 @@ public class Enemy : MonoBehaviour
         }
 
         Invoke(nameof(Spawn), cycleTime);
+    }
+    private void OnDestroy()
+    {
+        if (pointCounter != null)
+        {
+            pointCounter.AddPoints(score);
+        }
     }
 }

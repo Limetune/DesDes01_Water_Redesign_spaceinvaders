@@ -7,17 +7,9 @@ public class pointCounter : MonoBehaviour
     [SerializeField] PointHUD pointHUD;
 
 
-    private void Start()
+    public void AddPoints(int amount)
     {
-        StartCoroutine(CountPoints());
+        pointHUD.Points += amount;
     }
-    private IEnumerator CountPoints()
-    {
-        while(true)
-        {
-            pointHUD.Points += 5;
-
-            yield return new WaitForSeconds(1);
-        }
-    }
+   
 }
