@@ -556,13 +556,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af5ade8c1163654c950e96609a1174d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseEnemy: {fileID: 1159822281}
-  prefabs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  enemyPrefab: {fileID: 1159822280}
+  enemySprites:
+  - {fileID: 21300000, guid: c64b6b34fb665d340bd6d0cb3bd7d68a, type: 3}
+  - {fileID: 21300000, guid: 74ea749e122d2634f859c366c058a02c, type: 3}
+  - {fileID: 21300000, guid: 93ecdc41361161140bd2ab5357a7551a, type: 3}
   speed:
     serializedVersion: 2
     m_Curve:
@@ -981,13 +979,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af5ade8c1163654c950e96609a1174d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseEnemy: {fileID: 0}
-  prefabs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  enemyPrefab: {fileID: 0}
+  enemySprites: []
   speed:
     serializedVersion: 2
     m_Curve: []
