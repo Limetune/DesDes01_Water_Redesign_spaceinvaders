@@ -10,6 +10,7 @@ public class Enemy2 : MonoBehaviour
 
     [Header("Fiender")]
     public Enemy2 baseEnemy; // Single enemy object in scene
+    public Enemy2[] prefabs = new Enemy2[5];
     public AnimationCurve speed = new AnimationCurve();
     private Vector3 direction = Vector3.right;
     private Vector3 initialPosition;
