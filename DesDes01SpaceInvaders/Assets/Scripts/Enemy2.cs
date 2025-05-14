@@ -1,16 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Net.Sockets;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 public class Enemy2 : MonoBehaviour
 {
+    [Header("Prefabs och Sprites")]
+    public GameObject enemyPrefab; // Fiende-GameObject att klona (har SpriteRenderer)
+    public Sprite[] enemySprites;  // Olika sprites att tilldela
 
-    [Header("Fiender")]
-    public Enemy2 baseEnemy; // Single enemy object in scene
-    public Enemy2[] prefabs = new Enemy2[5];
+    [Header("Animation och Rörelse")]
     public AnimationCurve speed = new AnimationCurve();
     private Vector3 direction = Vector3.right;
     private Vector3 initialPosition;
@@ -37,15 +35,22 @@ public class Enemy2 : MonoBehaviour
             {
                 Vector3 position = new Vector3(centerOffset.x + 2f * j, centerOffset.y + 2f * i, 0f);
 
-                // Instantiate clone
-                Enemy2 enemy = Instantiate(baseEnemy, transform);
+                GameObject enemy = Instantiate(enemyPrefab, transform);
                 enemy.transform.localPosition = position;
-                enemy.gameObject.SetActive(true);
+                enemy.SetActive(true);
+
+                // Tilldela sprite baserat på rad (eller slumpa om du vill)
+                int spriteIndex = i % enemySprites.Length;
+                SpriteRenderer sr = enemy.GetComponent<SpriteRenderer>();
+                if (sr != null && enemySprites.Length > 0)
+                {
+                    sr.sprite = enemySprites[spriteIndex];
+                }
             }
         }
 
-        // Optional: hide the base object visually but don't disable if needed for prefab-like behavior
-        baseEnemy.gameObject.SetActive(false);
+        // Dölj prefab (för säkerhets skull)
+        enemyPrefab.SetActive(false);
     }
 
     private void Update()
@@ -108,7 +113,4 @@ public class Enemy2 : MonoBehaviour
         }
         return count;
     }
-
-
 }
-
